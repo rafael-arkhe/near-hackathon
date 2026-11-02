@@ -1,0 +1,8 @@
+{
+  "name": "arkhe-guard-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "render": "node render.mjs" },
+  "dependencies": { "puppeteer-core": "25.14.0" }
+}

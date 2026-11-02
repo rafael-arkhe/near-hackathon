@@ -12,6 +12,20 @@ reads the contract while recording.
 - Keys in the console: **→ / Space** next step, **←** back, **L** live check against testnet,
   **C** toggle captions, **R** restart.
 
+## Rendered version
+
+`video/render.mjs` produces the whole video without manual recording: it serves the console,
+drives headless Chrome at 1920×1080 through every step (including the live testnet read),
+narrates each caption with the offline Windows voice Microsoft Zira, and assembles
+`video/arkhe-guard-demo.mp4` (H.264 + AAC, about 85 s, loudness normalized) with ffmpeg.
+
+```bash
+cd video && npm ci && npm run render      # needs Chrome, ffmpeg on PATH, Windows PowerShell
+```
+
+The narration follows the console captions, so it is shorter than the 2:20 storyboard
+below; record your own voice over the same frames for a longer cut.
+
 ## Storyboard
 
 | # | Time | On screen (console step) | Narration |

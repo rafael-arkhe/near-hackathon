@@ -8,3 +8,6 @@ agent/out/
 agent/evidence.jsonl
 agent/mandate.json
 *.pem
+video/build/
+video/node_modules/
+video/*.mp4

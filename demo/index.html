@@ -422,6 +422,8 @@ window.addEventListener("keydown", e => {
   else if (e.key.toLowerCase() === "r") { step = 0; render(); }
 });
 document.addEventListener("click", () => { step = Math.min(step + 1, steps.length - 1); render(); });
+// ?record hides the keyboard hints for screen or headless recording.
+if (new URLSearchParams(location.search).has("record")) document.querySelector(".keys").style.visibility = "hidden";
 setStatic(); fit(); render();
 </script>
 </body>
