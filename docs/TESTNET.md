@@ -21,6 +21,18 @@ outside the repository, kept offline when not in use.
 Create the testnet accounts with the NEAR CLI (faucet-sponsored on testnet). When the CLI
 asks where to store keys, choose the legacy keychain or a file you control and back it up.
 
+Alternative without the CLI: implicit accounts. Run on your machine:
+
+```bash
+cd agent
+node src/new-testnet-accounts.ts /secure/path/arkhe-guard-keys
+```
+
+It writes `vault.key`, `agent.key` and `anchor.key` (`ed25519:...`, never overwritten, refused
+inside the repository) and prints three 64-hex addresses. Fund each from a testnet faucet;
+an implicit account exists once it receives NEAR. Use the hex addresses wherever this guide
+says `<vault>.testnet`, `<agent>.testnet` or `<anchor>.testnet`.
+
 ## 3. Keys that are not account keys
 
 ```bash
@@ -78,5 +90,6 @@ and an anchored checkpoint.
 
 ## Status
 
-The live path (`run-testnet.ts`, `NearVaultExecutor`) has not been run against testnet yet.
-The CLI commands follow near-cli-rs syntax and should be checked with `near --help`.
+Run end to end on 2026-11-02 with `scripts/testnet-setup.sh` (steps 3 to 5 automated; it
+reads account keys from a directory you choose and never prints them) and the two
+`run-testnet.ts` commands above. Results are in the README's "Live on NEAR testnet" section.

@@ -30,7 +30,7 @@ way to raise a limit: authority comes only from the owner's signature.
 | `agent/` (TypeScript, Node 24) | Guard, gullible planner, evidence log (Arkhe MMR), offline vault simulator, NEAR executor; 9 tests |
 | Offline demo | `npm run demo:offline` in `agent/` |
 | Cross-implementation checks | The contract accepts mandates signed by the agent (`fixtures/mandate-vector.json`); the agent's MMR reproduces all 20 Arkhe Rust vectors; the demo's checkpoint and inclusion proof verify with the Arkhe verification MCP (`arkhe_verify_checkpoint`: `VERIFIED`) |
-| Testnet deployment | Steps in [docs/TESTNET.md](docs/TESTNET.md); live path not yet run |
+| Testnet deployment | Live on `arkhe-guard-vault.testnet` (see below); steps in [docs/TESTNET.md](docs/TESTNET.md) |
 | Demo video | Next |
 
 ## Offline demo
@@ -45,6 +45,19 @@ refused by the local check and, with that check bypassed, by the vault itself; a
 oversized invoice is refused. The evidence log keeps digests of the triggers, never
 their text, and its checkpoint plus inclusion proof are written to `agent/out/` in the
 exact request shape `arkhe_verify_checkpoint` accepts.
+
+## Live on NEAR testnet
+
+| What | Evidence |
+| --- | --- |
+| Vault contract | `arkhe-guard-vault.testnet`, code hash `4AVEz4xzYEWxR2P8tEFKhD5YrRxpqkFf9Ee4T14WBM8M` (equals the `cargo near build` output) |
+| Agent key | `arkhe-guard-agent.testnet` signs with a function-call key limited to `execute` on the vault, 0.25 NEAR gas allowance |
+| Injected "pay 50 NEAR to attacker.testnet", local check bypassed | Refused by the contract: `receiver not allowed by mandate` |
+| Legitimate 1 NEAR invoice | [`BB8c1PLcCgrLtKtKA9cnwSmhDbthRZGkTKbhVKiGUz2Q`](https://explorer.testnet.near.org/transactions/BB8c1PLcCgrLtKtKA9cnwSmhDbthRZGkTKbhVKiGUz2Q), `mandate_execution` event, `get_spent` = 1 NEAR |
+| Evidence | `get_checkpoint("arkhe-guard-testnet")` holds root `82ab5587…548d` over 4 records; the agent's local log recomputes the same root and proves the executed payment's inclusion |
+
+The contract also computes the same `mandate_id` as the TypeScript agent, so the mandate
+encoding matches on the real NEAR VM.
 
 ## Contract interface
 
