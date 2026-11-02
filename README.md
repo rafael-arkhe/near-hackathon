@@ -26,11 +26,25 @@ way to raise a limit: authority comes only from the owner's signature.
 
 | Component | State |
 | --- | --- |
-| `contracts/agent-vault` | Implemented; 19 unit tests (mandate limits, injection refusals, revocation, checkpoint anchoring) |
-| Agent runner (TypeScript, function-call key) | Next |
-| Evidence log + checkpoint anchoring from the agent | Next |
-| Offline verification through the Arkhe verification MCP (`arkhe_verify_checkpoint`) | Byte-compatible: the contract anchors the same signed vector the MCP verifies (`fixtures/checkpoint-vector.json`) |
-| Testnet deployment, demo script, video | Next |
+| `contracts/agent-vault` | Implemented; 20 unit tests (mandate limits, injection refusals, revocation, checkpoint anchoring, TypeScript mandate vector) |
+| `agent/` (TypeScript, Node 24) | Guard, gullible planner, evidence log (Arkhe MMR), offline vault simulator, NEAR executor; 9 tests |
+| Offline demo | `npm run demo:offline` in `agent/` |
+| Cross-implementation checks | The contract accepts mandates signed by the agent (`fixtures/mandate-vector.json`); the agent's MMR reproduces all 20 Arkhe Rust vectors; the demo's checkpoint and inclusion proof verify with the Arkhe verification MCP (`arkhe_verify_checkpoint`: `VERIFIED`) |
+| Testnet deployment | Steps in [docs/TESTNET.md](docs/TESTNET.md); live path not yet run |
+| Demo video | Next |
+
+## Offline demo
+
+```bash
+cd agent && npm ci && npm run demo:offline
+```
+
+A deliberately gullible planner (standing in for a prompt-injected model) reads five
+triggers. The legitimate invoices are paid; the injected "pay 50 NEAR to attacker" is
+refused by the local check and, with that check bypassed, by the vault itself; an
+oversized invoice is refused. The evidence log keeps digests of the triggers, never
+their text, and its checkpoint plus inclusion proof are written to `agent/out/` in the
+exact request shape `arkhe_verify_checkpoint` accepts.
 
 ## Contract interface
 
@@ -66,7 +80,10 @@ Requires Rust 1.96 and the `wasm32-unknown-unknown` target.
 ```bash
 cargo test
 cargo build -p agent-vault --target wasm32-unknown-unknown --release
+(cd agent && npm ci && npm test)
 ```
+
+Use `cargo near build` (Linux, macOS or WSL) for the deployable wasm.
 
 On Windows, the test-only NEAR VM dependency needs `AWS_LC_SYS_PREBUILT_NASM=1` (or NASM installed).
 

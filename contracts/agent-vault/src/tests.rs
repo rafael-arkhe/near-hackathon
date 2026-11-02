@@ -273,3 +273,26 @@ fn log_id_needing_json_escape_is_refused() {
     c.log_id = "test\"log".into();
     v.anchor_checkpoint(c, sig);
 }
+
+#[test]
+fn typescript_agent_mandate_vector_matches_contract_encoding() {
+    let raw: near_sdk::serde_json::Value =
+        near_sdk::serde_json::from_str(include_str!("../../../fixtures/mandate-vector.json")).unwrap();
+    let m: Mandate = near_sdk::serde_json::from_value(raw["mandate"].clone()).unwrap();
+    let payload = mandate_payload(&m);
+    assert_eq!(hex::encode(&payload), raw["payload_hex"].as_str().unwrap());
+    assert_eq!(hex::encode(env::sha256_array(&payload)), raw["mandate_id_hex"].as_str().unwrap());
+    // The TypeScript demo owner key is the same public seed as owner_key() here.
+    assert_eq!(hex::encode(owner_key().verifying_key().to_bytes()), raw["owner_public_key_hex"].as_str().unwrap());
+
+    testing_env!(VMContextBuilder::new()
+        .current_account_id(acc("vault.testnet"))
+        .predecessor_account_id(acc("owner.testnet"))
+        .account_balance(NearToken::from_yoctonear(100 * NEAR))
+        .block_timestamp(T0)
+        .build());
+    let mut v = AgentVault::new(raw["owner_public_key_hex"].as_str().unwrap().to_string());
+    ctx("agent.testnet", T0 + 1);
+    let _ = v.execute(m, raw["signature_hex"].as_str().unwrap().to_string(), acc("payroll.testnet"), U128(NEAR));
+    assert_eq!(v.get_spent(raw["mandate_id_hex"].as_str().unwrap().to_string()).0, NEAR);
+}

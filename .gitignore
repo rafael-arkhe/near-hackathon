@@ -4,3 +4,7 @@ node_modules/
 *.key
 neardev/
 !Cargo.lock
+agent/out/
+agent/evidence.jsonl
+agent/mandate.json
+*.pem

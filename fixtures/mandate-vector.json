@@ -1,0 +1,22 @@
+{
+  "note": "Owner key is a PUBLIC demo key (seed 32 bytes of 0x01). Never trust it outside tests.",
+  "owner_public_key_hex": "8a88e3dd7409f195fd52db2d3cba5d72ca6709bf1d94121bf3748801b40f6f5c",
+  "mandate": {
+    "profile": "arkhe-guard-mandate@1",
+    "vault": "vault.testnet",
+    "agent": "agent.testnet",
+    "allowed_receivers": [
+      "supplier.testnet",
+      "payroll.testnet"
+    ],
+    "max_total": "5000000000000000000000000",
+    "max_per_call": "2000000000000000000000000",
+    "not_before_ns": "1800000000000000000",
+    "expires_at_ns": "1800003600000000000",
+    "nonce": "7",
+    "policy_id": "demo-policy@1"
+  },
+  "payload_hex": "414b473a4e4541523a4d414e444154453a7631001500000061726b68652d67756172642d6d616e6461746540310d0000007661756c742e746573746e65740d0000006167656e742e746573746e65740200000010000000737570706c6965722e746573746e65740f000000706179726f6c6c2e746573746e657400000025a4000a8bca2204000000000000000042db999d3784a70100000000000000b49376e2fa1800a06cc4bce5fa1807000000000000000d00000064656d6f2d706f6c6963794031",
+  "mandate_id_hex": "e778f3f8954efdb27d1f8947b1a86c02e3b894bd4dfd775389a7d55e4743ad8c",
+  "signature_hex": "29a2fa5e8a60fc1332a499a9807338e690fe2d14e2af62577b5f53ef25af150ceebf5cb189f23821709dc3c201a9a963565bb7bf83dc1f0c60a14f9a9ddcfb07"
+}

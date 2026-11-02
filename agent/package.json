@@ -1,0 +1,15 @@
+{
+  "name": "arkhe-guard-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "demo:offline": "node src/demo-offline.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "near-api-js": "7.3.1"
+  }
+}
