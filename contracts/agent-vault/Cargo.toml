@@ -1,0 +1,18 @@
+[package]
+name = "agent-vault"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "NEAR vault that lets an AI agent move funds only under an owner-signed mandate, and anchors signed evidence checkpoints."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=5.29.1"
+hex = "0.4"
+
+[dev-dependencies]
+near-sdk = { version = "=5.29.1", features = ["unit-testing"] }
+ed25519-dalek = "2.2"
+serde_json = "1"

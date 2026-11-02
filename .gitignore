@@ -1,0 +1,6 @@
+target/
+node_modules/
+.env
+*.key
+neardev/
+!Cargo.lock

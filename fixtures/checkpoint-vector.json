@@ -1,0 +1,47 @@
+{
+  "note": "Test-only key derived from a public seed (32 bytes of 0x07). Never trust it outside tests.",
+  "keyset": {
+    "version": 1,
+    "keys": [
+      {
+        "key_id": "test-key-1",
+        "log_id": "test-log",
+        "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA6kpsY+KcUgq+9VB7Ey7F+ZVHdq6+vnuSQh7qaRRG0iw=\n-----END PUBLIC KEY-----\n",
+        "revoked": false
+      }
+    ]
+  },
+  "request": {
+    "checkpoint": {
+      "profile": "arkhe-mmr-checkpoint@1",
+      "log_id": "test-log",
+      "mmr_profile_digest": "bcd07a275061ef385fccdd184030c2358fdd0937477cb0ef30cf8148342f2450",
+      "root_hex": "3686670ec4a843bc3caaf0d302906e7cb161f791ddbd739ffa0dbeda61f069bf",
+      "leaf_count": 5,
+      "issued_at": "2026-11-01T00:00:00Z"
+    },
+    "signatureHex": "b42dab19e043ed01fdf7611c327e5b55be58386f8a5579f8253a56208194ce2fa6534d807dd26ce7387a1fceeb81807a47aeac0bfc2301088ee4c1e860e2b00b",
+    "keyId": "test-key-1",
+    "inclusion": {
+      "leafHex": "0000000000000000000000000000000000000000000000000000000000000001",
+      "proof": [
+        {
+          "hashHex": "f158535bbffb524797d1a34a9dc6b59281f7e5eafacfef8ab9bbbda2a97d0be5",
+          "kind": "node",
+          "direction": "right"
+        },
+        {
+          "hashHex": "093480f00e08134da4e5aabcb1034e154800e07f9db0888a9631fca322aa3c95",
+          "kind": "node",
+          "direction": "right"
+        },
+        {
+          "hashHex": "014486f26ca863608c1ffb242275bbcbcf1479a662124e631d1719a0b795f71a",
+          "kind": "bag",
+          "direction": "right"
+        }
+      ]
+    }
+  },
+  "verifiedAt": "2026-11-01T12:00:00Z"
+}
