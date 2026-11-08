@@ -108,4 +108,4 @@ repository. Everything in this repository was written during the hackathon.
 
 ## License
 
-MIT
+GNU Affero General Public License version 3. See [LICENSE](LICENSE). A commercial license is available from the copyright holder.
